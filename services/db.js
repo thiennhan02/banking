@@ -1,8 +1,13 @@
+const Promise = require('bluebird');
 const dotenv =require ('dotenv');
-const Sequelize =require ('sequelize');
+
+
 dotenv.config();
 
-const conectionString = process.env.CONECTION;
-const db = new Sequelize(conectionString);
+const initOptions = {
+    promiseLib: Promise
+};
+const pgp = require('pg-promise')(initOptions);
+const db = pgp(process.env.CONECTION);
 
 module.exports =db;
